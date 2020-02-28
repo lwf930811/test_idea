@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace:用于隔离SQL全局唯一（采用接口和XML开发时为接口的全路径）
+ -->
+<mapper namespace="com.dj.ssm.mapper.UserMapper">
+    <sql id="column">
+		id,
+		user_name,
+		user_pwd,
+		phone,
+		email,
+		base_id,
+		level,
+		create_user_id,
+		create_time,
+		update_user_id,
+		update_time,
+		is_del,
+		code,
+		code_time,
+		img
+	</sql>
+	<select id="findNameAndUserPwd" resultType="User">
+			select
+				<include refid="column"/>
+			from
+				exp_user
+			where
+				user_name = #{userName}
+
+			and
+				user_pwd = #{userPwd}
+		</select>
+    <select id="findAll" resultType="User">
+		select
+			id,
+			user_name,
+			user_pwd,
+			phone,
+			email,
+			img,
+			(case
+			when level = 24 then '普通用户'
+			when level = 25 then '经理'
+			else  '管理员'
+			end
+		) as levelShow
+		from
+			exp_user
+		where
+			is_del = 1
+	</select>
+	<select id="findUserById" resultType="User">
+		select
+			<include refid="column"/>
+		from
+			exp_user
+		where
+			id = #{id}
+	</select>
+	<update id="update">
+		update
+			exp_user
+		<set>
+			<if test="userName != null and userName != ''">
+				user_name = #{userName},
+			</if>
+			<if test="userPwd != null and userPwd != ''">
+				user_pwd =  #{userPwd},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+			<if test="baseId != null">
+				base_id = #{baseId},
+			</if>
+			<if test="level != null">
+				level = #{level},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="updateUserId != null">
+				update_user_id = #{updateUserId},
+			</if>
+			<if test="isDel != null">
+				is_del = #{isDel},
+			</if>
+			<if test="isDel != null">
+				is_del = #{isDel},
+			</if>
+			<if test="code != null">
+				code = #{code},
+			</if>
+			<if test="codeTime != null">
+				code_time = #{codeTime},
+			</if>
+			update_time = now(),
+			<if test="img != null and img != ''">
+				img = #{img}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="findNameOrPhoneOrEmail" resultType="User">
+		select
+			<include refid="column"/>
+		from
+			exp_user
+		<where>
+			<if test="userName != null and userName != ''">
+				 user_name = #{userName}
+			</if>
+			<if test="phone != null and phone != ''">
+				 phone = #{phone}
+			</if>
+			<if test="email != null and email != ''">
+				 email = #{email}
+			</if>
+		</where>
+		<trim prefix=""></trim>
+	</select>
+	<insert id="insertUser">
+			insert
+		into
+		exp_user(
+			user_name,
+			user_pwd,
+			phone,
+			email,
+			base_id,
+			level,
+			create_time,
+			is_del
+		)values(
+			 #{userName},
+			 #{userPwd},
+			 #{phone},
+			 #{email},
+				null,
+				24,
+			  now(),
+			 1
+		)
+	</insert>
+
+
+</mapper>

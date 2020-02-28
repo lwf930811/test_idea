@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="token_api" />
+        <module name="token_mapper" />
+        <module name="token_commons" />
+        <module name="token_pojo" />
+        <module name="token_provider" />
+        <module name="token_web" />
+        <module name="token_config" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="token_api" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_commons" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_config" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_mapper" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_pojo" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_provider" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+      <module name="token_web" options="-verbose -bootclasspath D:/software/jdk/jdk1.8.0_151/jre/lib/rt.jar" />
+    </option>
+  </component>
+</project>
